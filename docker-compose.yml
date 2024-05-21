@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      MYSQL_DATABASE: bd_villes
+      MYSQL_CHARACTER_SET_SERVER: 'utf8mb4'
+      MYSQL_COLLATION_SERVER: 'utf8mb4_unicode_ci'
+      LANG: C.UTF-8
+    volumes:
+      - ./init-db:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+
+  backend:
+    build:
+      context: server/api-one
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8081/health"]
+      interval: 60s
+      timeout: 10s
+      retries: 5
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/bd_villes
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=
+    depends_on:
+      - db
+
+
+  frontend:
+    build:
+      context: client
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+
+volumes:
+  db-data:

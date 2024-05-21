@@ -1,0 +1,109 @@
+/* Map.css */
+.Map {
+  position: relative;
+  height: 500px; /* ou toute autre valeur appropriée */
+  width: 100%; /* ou toute autre valeur appropriée */
+}
+.city-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.city-table, .city-table th, .city-table td {
+  border: 1px solid black;
+}
+
+.city-table th, .city-table td {
+  padding: 8px;
+  text-align: left;
+}
+
+.city-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.city-table-container {
+  max-height: 400px; /* Définir la hauteur maximale du conteneur */
+  overflow-y: auto; /* Active le défilement vertical si le contenu dépasse */
+  width: 100%;
+}
+
+.marker {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: red;
+}
+
+/* Style pour les lignes de tableau mises en surbrillance */
+.highlight {
+  background-color: grey; /* Couleur de fond légère pour les lignes survolées */
+  cursor: pointer; /* Change le curseur pour indiquer que l'élément est interactif */
+  transition: background-color 0.3s ease; /* Transition douce pour le changement de couleur */
+}
+
+/* Style pour les marqueurs mis en surbrillance sur la carte */
+.highlight-marker {
+  border: 2px solid #ff0000; /* Bordure rouge pour distinguer le marqueur sélectionné */
+  border-radius: 50%; /* Garde la forme circulaire avec la bordure */
+  width: 14px; /* Augmente la taille pour le rendre plus visible */
+  height: 14px; /* Augmente la taille pour le rendre plus visible */
+  background-color: #ffff00; /* Change la couleur de fond pour distinguer */
+  transform: translate(-50%, -50%) scale(1.5); /* Agrandit le marqueur et le centre correctement */
+  transition: all 0.3s ease; /* Transition douce pour les changements de style */
+}
+
+
+.city-marker {
+  position: absolute;
+  height: 10px;
+  width: 10px;
+  background-color: yellow; /* Couleur du marqueur */
+  border-radius: 50%; /* Rend les marqueurs circulaires */
+  transform: translate(-50%, -50%); /* Centre le marqueur sur sa position exacte */
+  cursor: pointer; /* Change le curseur en main pour indiquer que le marqueur est interactif */
+}
+
+
+.highlighted {
+  background-color: yellow; 
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.modal, .city-table {
+  font-size: 1em; /* S'adapte en fonction de la taille de police du body */
+}
+.modal {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1001;
+  max-width: 90%;
+  width: auto;
+  min-width: 300px;
+}
+.filter-modal form > div {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px; /* Ajoute de l'espace entre les champs */
+}
+
+.modal-close-btn {
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 18px;
+}

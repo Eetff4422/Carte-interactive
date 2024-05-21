@@ -1,0 +1,12 @@
+@startuml Containers
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+Person(user, "Utilisateur", "Utilise l'application pour explorer les villes sur la carte.")
+Container(app, "Application Web (Client)", "React", "Affiche la carte et permet aux utilisateurs de sélectionner des points.")
+Container(api, "API Backend", "Spring Boot", "Traite les requêtes et interroge la base de données.")
+ContainerDb(db, "Base de Données", "MySQL", "Contient les données des villes françaises.")
+
+Rel(user, app, "Interagit avec")
+Rel(app, api, "Envoie des coordonnées via API")
+Rel(api, db, "Requêtes SQL")
+@enduml

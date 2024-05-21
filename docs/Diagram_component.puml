@@ -1,0 +1,30 @@
+@startuml Component
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/latest/C4_Component.puml
+
+LAYOUT_WITH_LEGEND()
+
+Container(webApp, "Web application", "JavaScript et React", "Affiche la carte et permet aux utilisateurs de sélectionner des points.")
+
+Component(AppComponent, "MapComponent", "JavaScript et React", "Initialise l'application en fournissant au composant Map la carte ainsi que les fonctions nécessaires au calcul des coordonnées.")
+Component(MapComponent, "MapComponent", "JavaScript et React", "Affiche la carte, permet de récupérer la position du clique de l'utilisateur, récupère les informations sur les villes autour du point cliqué par l'utilisateur en faisant une requête API.")
+
+
+Container(springApp, "Spring Application", "Spring Boot", "Application Web Spring Boot pour gérer les informations des villes françaises.")
+
+Component(villeController, "VilleController", "Spring MVC Rest Controller", "Gère les requêtes HTTP entrantes pour les opérations sur les villes.")
+Component(villeService, "VilleService", "Java", "Fournit des services pour accéder aux informations des villes et effectuer des calculs, comme la recherche des villes à proximité et la requête à la base de données.")
+ComponentDb(villeModel, "Ville", "JPA Entity", "Représente l'entité Ville dans la base de données.")
+
+Container(BDD, "Base de données (bd_villes)", "MySQL", "Base de données contenant les informations sur les villes de la France.")
+
+Component(ville, "Ville", "Table", "Table de données contenant les informations sur les villes de la France.")
+
+Rel(webApp, AppComponent, "Utilise ")
+Rel(AppComponent, MapComponent, "Fournit la carte et les fonctions de calcul de coordonnées à")
+Rel(webApp, springApp, "Envoie des requêtes à")
+Rel(springApp, villeController, "Utilise ")
+Rel(villeController, villeService, "Utilise ")
+Rel(BDD, ville, "Utilise ")
+Rel(villeService, BDD, "Accède à")
+Rel(villeController, villeModel, "Accède à", "JPA")
+@enduml

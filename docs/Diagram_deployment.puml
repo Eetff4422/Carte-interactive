@@ -1,0 +1,23 @@
+@startuml Deployment
+!theme spacelab
+
+node "Web Browser" {
+  [JavaScript/React Application]
+}
+
+node "Web Server" {
+  [Spring Application]
+  database "Database" {
+    [Villes]
+  }
+}
+
+node "Client" {
+  [User Interface]
+}
+
+[User Interface] --> [JavaScript/React Application] : Uses
+[JavaScript/React Application] --> [Spring Application] : API Requests
+[Spring Application] --> [Database] : Queries
+
+@enduml

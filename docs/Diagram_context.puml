@@ -1,0 +1,13 @@
+@startuml Context
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+Person(user, "Utilisateur", "Interagit avec la carte de France interactive pour explorer les villes.")
+System(app, "Carte de France Interactive", "Permet aux utilisateurs de trouver des villes françaises à proximité d'un point choisi sur une carte.")
+
+System_Ext(api, "API Backend", "Reçoit les coordonnées du point cliqué et renvoie les villes à proximité.")
+System_Ext(db, "Base de Données MySQL", "Stocke les informations sur les villes françaises.")
+
+Rel(user, app, "Utilise")
+Rel(app, api, "Envoie des requêtes à")
+Rel(api, db, "Interroge")
+@enduml
